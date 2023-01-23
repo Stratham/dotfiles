@@ -21,27 +21,30 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+## Oh My Zsh Setting
+ZSH_THEME="robbyrussell"
 #
- zinit light zdharma-continuum/fast-syntax-highlighting
-#
- zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
- zinit light zsh-users/zsh-autosuggestions
-#
-# Completions
- zinit ice lucid wait='0'
- zinit light zsh-users/zsh-completions
-#
-#
+## Oh-My-Zsh Setting
+plugins=(
+  git
+)
+# ZINIT SETTINGS
+ zi snippet OMZL::git.zsh
  zinit snippet OMZ::lib/completion.zsh
  zinit snippet OMZ::lib/history.zsh
  zinit snippet OMZ::lib/key-bindings.zsh
  zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
  zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
  zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
+ # Load Git plugin from OMZ
+ zi snippet OMZP::git
+ zi cdclear -q # <- forget completions provided up to this moment
+# THEME
+setopt promptsubst
+# Load Prompt
+zi snippet OMZT::robbyrussell
 #
- zinit ice lucid wait='1'
- zinit snippet OMZ::plugins/git/git.plugin.zsh
-# Turbo mode with "wait"
+## Turbo mode with "wait"
 zinit light-mode lucid wait for \
   is-snippet OMZ::lib/history.zsh \
   MichaelAquilina/zsh-you-should-use \
@@ -52,6 +55,37 @@ zinit light-mode lucid wait for \
  zinit ice from"gh-r" as"program"
  zinit light junegunn/fzf
  zinit light Aloxaf/fzf-tab
+## Syntax Highlighting
+ zinit ice lucid wait='0' atinit='zpcompinit'
+ zinit light zdharma-continuum/fast-syntax-highlighting
 #
+#
+## Auto Suggestion
+ zinit ice lucid wait="0" atload='_zsh_autosuggest_start'
+ zinit light zsh-users/zsh-autosuggestions
+#
+## Completions
+ zinit ice lucid wait='0'
+ zinit light zsh-users/zsh-completions
+#
+#
+#
+ zinit ice lucid wait='1'
+ zinit snippet OMZ::plugins/git/git.plugin.zsh
  zinit ice as"program" from"gh-r" mv"exa* -> exa" pick"exa/exa" lucid atload"alias ls='exa --icons'"
  zinit light ogham/exa
+#
+zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+zinit light trapd00r/LS_COLORS
+#
+# sharkdp/bat
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
+#
+#
+## ALIASES
+ alias la='ls -la'
+ alias ll='ls -l'
+#

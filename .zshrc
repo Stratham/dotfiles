@@ -21,6 +21,13 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
+#
+### USER CONFIG ###
+#
+## OPTS
+#
+  setopt autocd
+#
 ## Oh My Zsh Setting
 ZSH_THEME="robbyrussell"
 #
